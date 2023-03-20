@@ -1,20 +1,48 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import CategoryView from "@/views/CategoryView.vue";
+import CartView from "@/views/CartView.vue";
+import CheckoutView from "@/views/CheckoutView.vue";
+import ConfirmationView from "@/views/ConfirmationView.vue";
+import NotFound from "@/components/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
+    name: "home-view",
     component: HomeView,
+    alias: ["/home", "/index.html"],
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/category/:name",
+    name: "category-view",
+    component: CategoryView,
+    props: true,
+  },
+  {
+    path: "/cart",
+    name: "cart-view",
+    component: CartView,
+  },
+
+  {
+    path: "/checkout",
+    name: "checkout-view",
+    component: CheckoutView,
+  },
+  {
+    path: "/confirmation",
+    name: "confirmation-view",
+    component: ConfirmationView,
+  },
+  {
+    path: "/category/",
+    redirect: "/category/New Books",
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFound,
   },
 ];
 
